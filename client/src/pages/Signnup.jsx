@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BgImage from '../components/BgImage';
 import Header from '../components/Header';
-import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../utils/Firebase-Config';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,15 +17,15 @@ const Signnup = () => {
   const handleSubmit = async () => {
     try {
       //This helps to store the user into the Firebase Database 
-      const {email, password} = formvalues;
-      await createUserWithEmailAndPassword(firebaseAuth,email,password);
+      const { email, password } = formvalues;
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
     } catch (error) {
       console.log(error);
     }
   };
 
-  onAuthStateChanged(firebaseAuth,(currentUser) => {
-    if(currentUser) navigate('/');
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) navigate('/');
   });
 
   return (
@@ -115,7 +115,7 @@ const Container = styled.div`
       }
     }
     button {
-       padding: 0.5rem 1rem;
+      padding: 0.5rem 1rem;
       background-color: #e50914;
       border: none;
       cursor: pointer;

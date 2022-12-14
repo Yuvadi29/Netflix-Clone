@@ -6,9 +6,11 @@ import Movie from "../assets/homeTitle.webp";
 import { FaPlay } from 'react-icons/fa';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Netflix = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -29,7 +31,7 @@ const Netflix = () => {
           </div>
           <div className="buttons flex">
             <button
-              // onClick={() => navigate("/player")}
+              onClick={() => navigate("/player")}
               className="flex j-center a-center"
             >
               <FaPlay />

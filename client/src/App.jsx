@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Signnup from './pages/Signnup';
+import Netflix from './pages/Netflix';
 
 const App = () => {
   return (
-    <div>App</div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element = {<Netflix/>}/>
+        <Route exact path="/login" element = {<Login/>}/>
+        <Route exact path="/signup" element = {<Signnup/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

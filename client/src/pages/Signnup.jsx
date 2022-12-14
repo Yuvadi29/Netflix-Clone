@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Signnup = () => {
   return (
@@ -6,4 +6,4 @@ const Signnup = () => {
   )
 }
 
-export default Signnup
+export default Signnup;

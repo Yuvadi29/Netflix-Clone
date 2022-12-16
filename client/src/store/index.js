@@ -41,8 +41,8 @@ const RawData = async (api, genres, paging) => {
 
         );
         createArrayFromRawData(results, movies, genres);
-        return movies;
     }
+    return movies;
 }
 
 export const FetchMovies = createAsyncThunk(

@@ -5,7 +5,8 @@ const Slider = ({movies}) => {
 
     const getMoviesFromRange = (from,to) => {
         return movies.slice(from,to);
-    }
+    };
+
 
   return (
     <div>
@@ -19,4 +20,4 @@ const Slider = ({movies}) => {
   )
 }
 
-export default Slider;
+export default React.memo(Slider);

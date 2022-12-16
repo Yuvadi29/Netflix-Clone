@@ -2,10 +2,16 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import Card from "./Card";
+
+
+
 export default React.memo(function CardSlider({ data, title }) {
+    
     const listRef = useRef();
     const [sliderPosition, setSliderPosition] = useState(0);
     const [showControls, setShowControls] = useState(false);
+    
+    
     const handleDirection = (direction) => {
         let distance = listRef.current.getBoundingClientRect().x - 70;
         if (direction === "left" && sliderPosition > 0) {

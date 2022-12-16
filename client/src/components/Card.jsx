@@ -68,9 +68,9 @@ const Card = ({ movieData, isLiked = false }) => {
             }
         </Container>
     )
-}
+} ;
 
-export default Card;
+export default React.memo(Card);
 
 const Container = styled.div`
   max-width: 230px;

@@ -7,18 +7,24 @@ import { FaPlay } from 'react-icons/fa';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { GetGenres } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchMovies, GetGenres } from '../store';
 
 const Netflix = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const movies = useSelector((state) => state.netflix.movies);
 
   useEffect(() => {
     dispatch(GetGenres())
   }, [dispatch]);
-  
+
+
+  useEffect(() => {
+    if (genresLoaded) dispatch(FetchMovies({ type: "all" }));
+  })
 
 
   window.onscroll = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import Slider from '../components/Slider';
 import backgroundImage from '../assets/home.jpg';
 import Movie from "../assets/homeTitle.webp";
 import { FaPlay } from 'react-icons/fa';
@@ -60,7 +61,7 @@ const Netflix = () => {
           </div>
         </div>
       </div>
-      {/* <Slider movies={movies} /> */}
+      <Slider movies={movies} />
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import NotAvailable from '../components/NotAvailable';
 import Slider from '../components/Slider';
@@ -9,6 +9,7 @@ import { GetGenres, FetchMovies } from '../store';
 import styled from 'styled-components';
 import { firebaseAuth } from '../utils/Firebase-Config';
 import SelectedGenre from '../components/SelectedGenre';
+import { setUseProxies } from 'immer';
 
 
 const Tv = () => {
@@ -18,11 +19,13 @@ const Tv = () => {
     const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
     const movies = useSelector((state) => state.netflix.movies);
     
-    // const navigate = useNavigate();
+    const [user, setUser] = useState(undefined);
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(GetGenres());
+        if(!genres.length) dispatch(GetGenres());
     }, [dispatch]);
 
 
@@ -41,7 +44,10 @@ const Tv = () => {
     };
 
     onAuthStateChanged(firebaseAuth, (currentUser) => {
-        // if (currentUser) navigate('/');
+        if (currentUser) setUseProxies(currentUser.uid);
+        else {
+            navigate("/login");
+        }
     });
 
 

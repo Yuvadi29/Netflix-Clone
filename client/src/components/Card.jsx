@@ -9,14 +9,16 @@ import { BsCheck } from "react-icons/bs";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/Firebase-Config";
-// import { removeMovieFromLiked } from "../store";
+import { removeFromLikedMovies } from "../store";
 import video from "../assets/video.mp4";
+import { useDispatch } from "react-redux";
 
 export default React.memo(function Card({ movieData, isLiked = false }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState(undefined);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -36,7 +38,6 @@ export default React.memo(function Card({ movieData, isLiked = false }) {
     } catch (error) {
       console.log(error);
     }
-
 
   };
 
@@ -82,9 +83,17 @@ export default React.memo(function Card({ movieData, isLiked = false }) {
                 {isLiked ? (
                   <BsCheck
                     title="Remove from List"
+                    onClick={() =>
+                      dispatch(
+                        removeFromLikedMovies({ movieId: movieData.id, email })
+                      )
+                    }
                   />
                 ) : (
-                  <AiOutlinePlus title="Add to my list" onClick={addToList} />
+                  <AiOutlinePlus
+                    title="Add to my list"
+                    onClick={addToList}
+                  />
                 )}
               </div>
               <div className="info">

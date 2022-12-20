@@ -18,6 +18,8 @@ const Movies = () => {
     const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
     const movies = useSelector((state) => state.netflix.movies);
     
+    const [user, setUser] = useState(undefined);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -41,7 +43,10 @@ const Movies = () => {
     };
 
     onAuthStateChanged(firebaseAuth, (currentUser) => {
-        // if (currentUser) navigate('/');
+        if (currentUser) setUser(currentUser.uid);
+        else {
+            navigate("/login");
+        }
     });
 
 

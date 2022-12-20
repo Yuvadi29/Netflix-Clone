@@ -30,7 +30,6 @@ const UserList = () => {
     useEffect(() => {
         if (email) {
             dispatch(getUserLikedMovies(email));
-            window.scrollTo(0, 0);
         }
     }, [dispatch, email]);
 
@@ -47,9 +46,15 @@ const UserList = () => {
                 <h1>My List</h1>
                 <div className="grid flex">
                     {movies.map((movie, index) => {
-                        return <Card movieData={movie} index={index} key={movie.id} isLiked={true} />
-                    }
-                    )}
+                        return (
+                            <Card
+                                movieData={movie}
+                                index={index}
+                                key={movie.id}
+                                isLiked={true}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </Container>
@@ -58,7 +63,6 @@ const UserList = () => {
 }
 
 export default UserList;
-
 const Container = styled.div`
 .content {
     margin: 2.3rem;

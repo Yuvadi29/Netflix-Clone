@@ -2,21 +2,24 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require("./routes/userRoutes");
+const dotenv = require('dotenv');
 
 const app = express();
+
+dotenv.config();
 
 app.use(cors()); //For cors request
 app.use(express.json());
 
 //Database connection
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb://localhost:27017/netflixclone",{
+mongoose.connect(process.env.MONGO_URL, {
 
-    useNewUrlParser: true, 
+    useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() =>{
+}).then(() => {
     console.log("Connected to the database Successfully");
-}).catch((error) => { 
+}).catch((error) => {
     console.log(error);
 });
 
@@ -24,4 +27,6 @@ app.use("/api/user", userRoutes);
 
 
 
-app.listen(5000, console.log("Server Running"));
+app.listen(5000, () => {
+    console.log("Server Running");
+});

@@ -32,14 +32,13 @@ const createArrayFromRawData = (array, movies, genres) => {
             });
     });
 };
-const RawData = async (api, genres, paging) => {
+const RawData = async (api, genres, paging = false) => {
     const movies = [];
 
     for (let i = 1; movies.length < 60 && i < 10; i++) {
-        const { data: {results} } = await axios.get(`
-        ${api}${paging ? `&page=${i}` : ""}`
-
-        );
+        const { 
+            data: { results },
+        } = await axios.get(`${api}${paging ? `&page=${i}` : ""}`);
         createArrayFromRawData(results, movies, genres);
     }
     return movies;
@@ -58,7 +57,20 @@ export const FetchMovies = createAsyncThunk(
         );
     }
 );
-// return RawData(`${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`);
+export const FetchDataByGenre = createAsyncThunk(
+    "netflix/genre",
+    async ({ genre, type }, thunkAPI) => {
+        const {
+            netflix: { genres },
+        } = thunkAPI.getState();
+        const data =  RawData(
+            `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
+            genres
+        );
+        console.log(data);
+        return data;
+    }
+);
 //A "slice" is a collection of Redux reducer logic and actions for a single feature in your app, typically defined together in a single file. The name comes from splitting up the root Redux state object into multiple "slices" of state.
 
 
@@ -72,6 +84,9 @@ const NetflixSlice = createSlice({
             state.genresLoaded = true;
         });
         builder.addCase(FetchMovies.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+        builder.addCase(FetchDataByGenre.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
 

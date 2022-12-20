@@ -6,7 +6,7 @@ import Card from "./Card";
 
 
 export default React.memo(function CardSlider({ data, title }) {
-    
+
     const listRef = useRef();
     const [sliderPosition, setSliderPosition] = useState(0);
     const [showControls, setShowControls] = useState(false);
@@ -37,7 +37,7 @@ export default React.memo(function CardSlider({ data, title }) {
                     className={`slider-action left ${!showControls ? "none" : ""
                         } flex j-center a-center`}
                 >
-                    <AiOutlineLeft onClick={() => handleDirection("left")} />
+                    <AiOutlineLeft onClick={() => handleDirection("left")} style={{ cursor: "pointer"}} />
                 </div>
                 <div className="slider flex" ref={listRef}>
                     {data.map((movie, index) => {
@@ -48,7 +48,7 @@ export default React.memo(function CardSlider({ data, title }) {
                     className={`slider-action right ${!showControls ? "none" : ""
                         } flex j-center a-center`}
                 >
-                    <AiOutlineRight onClick={() => handleDirection("right")} />
+                    <AiOutlineRight onClick={() => handleDirection("right")} style={{ cursor: "pointer"}} />
                 </div>
             </div>
         </Container>

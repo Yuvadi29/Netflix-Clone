@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import NotAvailable from '../components/NotAvailable';
 import Slider from '../components/Slider';
@@ -18,12 +18,12 @@ const Tv = () => {
     const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
     const movies = useSelector((state) => state.netflix.movies);
     
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(GetGenres());
-    }, []);
+    }, [dispatch]);
 
 
     useEffect(() => {

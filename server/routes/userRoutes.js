@@ -1,7 +1,7 @@
-const addToLiked = require('../controllers/UserController');
+const {addToLikedMovies} = require("../controllers/UserController");
 
 const router = require("express").Router();
 
-router.post('/add',(req,res) => addToLiked);
+router.post("/add", addToLikedMovies);
 
 module.exports = router;

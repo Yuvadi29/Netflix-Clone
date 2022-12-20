@@ -9,68 +9,68 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
 
 const Card = ({ movieData, isLiked = false }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const navigate = useNavigate();
-    return (
-        <Container onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <img
+  const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+  return (
+    <Container onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
+        alt="Movie"
+      />
+      {
+        isHovered && (
+          <div className="hover">
+            <div className="image-video-container">
+              <img
                 src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
                 alt="Movie"
-            />
-            {
-                isHovered && (
-                    <div className="hover">
-                        <div className="image-video-container">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
-                                alt="Movie"
-                                onClick={() => navigate("/player")}
-                            />
-                            <video
-                                src={video}
-                                autoPlay
-                                loop
-                                muted
-                            />
-                        </div>
-                        <div className="info-container flex column">
-                            <h3 className='name' onClick={() => navigate("/player")}>{movieData.name}</h3>
-                            <div className="icons flex j-between">
-                                <div className="controls flex">
-                                    <IoPlayCircleSharp
-                                        title='play'
-                                        onClick={() => navigate("/player")}
-                                    />
-                                    <RiThumbUpFill title='Like' />
-                                    <RiThumbDownFill title='Dislike' />
+                onClick={() => navigate("/player")}
+              />
+              <video
+                src={video}
+                autoPlay
+                loop
+                muted
+              />
+            </div>
+            <div className="info-container flex column">
+              <h3 className='name' onClick={() => navigate("/player")}>{movieData.name}</h3>
+              <div className="icons flex j-between">
+                <div className="controls flex">
+                  <IoPlayCircleSharp
+                    title='play'
+                    onClick={() => navigate("/player")}
+                  />
+                  <RiThumbUpFill title='Like' />
+                  <RiThumbDownFill title='Dislike' />
 
-                                    {
-                                        isLiked ? (
-                                            <BsCheck title='Remove From List' />) : (
-                                            <AiOutlinePlus title='Add to My List' />
-                                        )
-                                    }
-                                </div>
-                                <div className="info">
-                                    <BiChevronDown title='More Info' />
-                                </div>
-                                <div className="genres flex">
-                                    <ul className='flex'>
-                                        {movieData.genres.map((genre) => {
-                                           return (
-                                               <li key={genre}>{genre}</li>
-                                           )
-                                        })}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
-        </Container>
-    )
-} ;
+                  {
+                    isLiked ? (
+                      <BsCheck title='Remove From List' />) : (
+                      <AiOutlinePlus title='Add to My List' />
+                    )
+                  }
+                </div>
+                <div className="info">
+                  <BiChevronDown title='More Info' />
+                </div>
+                {/* <div className="genres flex">
+                  <ul className='flex'>
+                    {movieData.genres.map((genre) => {
+                      return (
+                        <li key={genre}>{genre}</li>
+                      )
+                    })}
+                  </ul>
+                </div> */}
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </Container>
+  )
+};
 
 export default React.memo(Card);
 
@@ -141,7 +141,7 @@ const Container = styled.div`
       ul {
         gap: 1rem;
         li {
-          padding-right: 0.7rem;
+          padding-right: 0.4rem;
           &:first-of-type {
             list-style-type: none;
           }

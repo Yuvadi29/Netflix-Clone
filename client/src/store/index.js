@@ -73,6 +73,13 @@ export const FetchDataByGenre = createAsyncThunk(
 );
 //A "slice" is a collection of Redux reducer logic and actions for a single feature in your app, typically defined together in a single file. The name comes from splitting up the root Redux state object into multiple "slices" of state.
 
+export const getUserLikedMovies = createAsyncThunk("netflix/getliked", async (email) => {
+    const {
+        data: { movies }
+    } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
+    return movies;
+})
+
 
 
 const NetflixSlice = createSlice({
@@ -87,6 +94,9 @@ const NetflixSlice = createSlice({
             state.movies = action.payload;
         });
         builder.addCase(FetchDataByGenre.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+        builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
 

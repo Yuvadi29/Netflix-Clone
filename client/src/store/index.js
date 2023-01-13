@@ -76,14 +76,14 @@ export const FetchDataByGenre = createAsyncThunk(
 export const getUserLikedMovies = createAsyncThunk("netflix/getliked", async (email) => {
     const {
         data: { movies }
-    } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
+    } = await axios.get(`https://netflixclone1.onrender.comv/api/user/liked/${email}`);
     return movies;
 })
 
 export const removeFromLikedMovies = createAsyncThunk("netflix/removeliked", async ({ movieId, email }) => {
     const {
         data: { movies }
-    } = await axios.put(`http://localhost:5000/api/user/delete`, 
+    } = await axios.put(`https://netflixclone1.onrender.com/api/user/delete`, 
     {
         email, 
         movieId

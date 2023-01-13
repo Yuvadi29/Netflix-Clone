@@ -31,7 +31,7 @@ export default React.memo(function Card({ movieData, isLiked = false }) {
     // console.log("added");
 
     try {
-      await axios.post("http://localhost:5000/api/user/add", {
+      await axios.post("https://netflixclone1.onrender.com/api/user/add", {
         email,
         data: movieData,
       });

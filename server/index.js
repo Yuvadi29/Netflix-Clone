@@ -8,7 +8,9 @@ const app = express();
 
 dotenv.config();
 
-app.use(cors()); //For cors request
+app.use(cors({
+    "origin": "https://adityanetflixclone.netlify.app"
+})); //For cors request
 app.use(express.json());
 
 //Database connection
